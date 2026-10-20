@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+build/
+dist/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Misc artifacts & HTML dumps
+sora_lindqvist*.html
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment & local secrets
+.env
+.env*.local
+
+# IDE & OS
+.DS_Store
+.idea
+.vscode
