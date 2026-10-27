@@ -2,7 +2,7 @@ import type { ChildCard } from './types';
 
 type Store = 'session' | 'local';
 
-const DEVICE_KEY = 'kids.device';
+const DEVICE_KEY = 'kids.device_token';
 const KID_KEY = 'kids.kid';
 const PLAY_KEY = 'kids.play';
 
@@ -39,8 +39,21 @@ export function removeKey(key: string, kind: Store): void {
   }
 }
 
-export const getDeviceToken = (): string | null => readJson<string>(DEVICE_KEY, 'local');
-export const setDeviceToken = (t: string): void => writeJson(DEVICE_KEY, t, 'local');
+// Stored raw (not JSON) so localStorage['kids.device_token'] is the token itself.
+export function getDeviceToken(): string | null {
+  try {
+    return store('local')?.getItem(DEVICE_KEY) ?? null;
+  } catch {
+    return null;
+  }
+}
+export function setDeviceToken(t: string): void {
+  try {
+    store('local')?.setItem(DEVICE_KEY, t);
+  } catch {
+    /* storage unavailable: behave as empty */
+  }
+}
 export const clearDeviceToken = (): void => removeKey(DEVICE_KEY, 'local');
 
 export type KidSession = { token: string; child: ChildCard };

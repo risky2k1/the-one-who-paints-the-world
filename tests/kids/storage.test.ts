@@ -20,6 +20,7 @@ describe('kids storage', () => {
   it('device token roundtrip', () => {
     setDeviceToken('d1');
     expect(getDeviceToken()).toBe('d1');
+    expect(s.local.getItem('kids.device_token')).toBe('d1');
   });
 
   it('kid session roundtrip', () => {
