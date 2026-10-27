@@ -190,6 +190,31 @@ export const PortfolioExperience: React.FC = () => {
       data-is-travelling={String(navState.isTravelling)}
       data-route-u={navState.currentU.toFixed(3)}
     >
+      {/* Version Switcher Badge */}
+      <div style={{ position: 'fixed', top: '16px', right: '16px', zIndex: 50 }}>
+        <a
+          href="/v2"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(203, 213, 225, 0.9)',
+            padding: '6px 14px',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            fontWeight: 700,
+            color: '#1e293b',
+            textDecoration: 'none',
+            boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3ca89d' }} />
+          v1 (Pure CSS) • <span style={{ color: '#0f766e', textDecoration: 'underline' }}>Switch to v2 (Tailwind) →</span>
+        </a>
+      </div>
+
       {/* 3D Interactive Diorama World or Resilient Fallback */}
       {navState.webglAvailable ? (
         <ExperienceCanvas

@@ -1,5 +1,6 @@
 import React from 'react';
 import './globals.css';
+import './tailwind.css';
 
 export const metadata = {
   title: 'Sora Lindqvist • Interactive 3D Platform & Cloud Portfolio',
@@ -13,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans text-slate-800" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

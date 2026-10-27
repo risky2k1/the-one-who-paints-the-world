@@ -18,40 +18,49 @@
   --radius-sm: 10px;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/*
+ * Pin the cascade-layer order to match Tailwind v4 (used by /v2) and keep the
+ * universal reset inside `base`. Unlayered rules always beat layered ones, so an
+ * unlayered `* { margin: 0; padding: 0 }` would silently override every
+ * Tailwind spacing utility (p-*, px-*, m-*, mt-*...) on the v2 route.
+ */
+@layer properties, theme, base, components, utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden !important;
-  overscroll-behavior: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
   color: var(--text-primary);
-  background: linear-gradient(
-    160deg,
-    var(--pastel-bg-top) 0%,
-    var(--pastel-bg-mid) 52%,
-    var(--pastel-bg-bottom) 100%
-  );
+  background-color: #faf7f2;
   -webkit-font-smoothing: antialiased;
-  user-select: none;
 }
 
-/* Single-viewport container: never scrolls at document level */
+/* Single-viewport container for 3D Portfolio: fixed full screen, never scrolls at document level */
 .portfolio-viewport {
-  position: relative;
+  position: fixed;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+  overscroll-behavior: none;
+  user-select: none;
+  z-index: 50;
   background: radial-gradient(
     circle at 50% 36%,
     #f3f8fe 0%,
@@ -748,32 +757,37 @@ body {
   padding: 8px 14px;
   cursor: pointer;
   transition: all 0.16s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .pastel-action-btn.is-primary {
-  background: linear-gradient(135deg, #4db6ac, #3b9c93);
-  color: #ffffff;
-  border: 1px solid #358f86;
+  background: linear-gradient(135deg, #4db6ac, #3b9c93) !important;
+  color: #ffffff !important;
+  border: 1px solid #358f86 !important;
   box-shadow: 0 4px 12px rgba(60, 168, 157, 0.25);
 }
 
 .pastel-action-btn.is-primary:hover,
 .pastel-action-btn.is-primary:focus-visible {
-  background: linear-gradient(135deg, #3ca89d, #2d857d);
+  background: linear-gradient(135deg, #3ca89d, #2d857d) !important;
+  color: #ffffff !important;
   transform: translateY(-1px);
   outline: 2px solid rgba(60, 168, 157, 0.4);
 }
 
 .pastel-action-btn.is-secondary {
-  background: #ffffff;
-  color: var(--text-primary);
-  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: #ffffff !important;
+  color: var(--text-primary) !important;
+  border: 1px solid rgba(148, 163, 184, 0.5) !important;
 }
 
 .pastel-action-btn.is-secondary:hover,
 .pastel-action-btn.is-secondary:focus-visible {
-  border-color: var(--accent-teal);
-  background: #f8fafc;
+  border-color: var(--accent-teal) !important;
+  background: #f8fafc !important;
   outline: 2px solid rgba(60, 168, 157, 0.35);
 }
 
@@ -1002,6 +1016,13 @@ body {
   padding: 4px 10px;
 }
 
+.project-card-footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 /* Experience Timeline */
 .experience-timeline {
   display: flex;
@@ -1111,6 +1132,150 @@ body {
 .contact-channel-note {
   font-size: 10px;
   color: var(--text-muted);
+}
+
+/* Interactive Contact Direct Message Form */
+.contact-form-box {
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-form-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.contact-form-subheading {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.contact-alert-banner {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-alert-banner.is-success {
+  background: rgba(94, 194, 183, 0.18);
+  border: 1px solid rgba(94, 194, 183, 0.45);
+  color: #0f766e;
+}
+
+.contact-alert-banner.is-error {
+  background: rgba(242, 155, 142, 0.2);
+  border: 1px solid rgba(242, 155, 142, 0.45);
+  color: #b91c1c;
+}
+
+.alert-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.contact-direct-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .form-row-duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.field-required {
+  color: #e11d48;
+}
+
+.pastel-text-input,
+.pastel-textarea-input {
+  width: 100%;
+  font-size: 12px;
+  font-family: inherit;
+  padding: 7px 10px;
+  background: rgba(248, 250, 252, 0.95);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  border-radius: 6px;
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.pastel-text-input:focus,
+.pastel-textarea-input:focus {
+  outline: none;
+  border-color: #5ec2b7;
+  box-shadow: 0 0 0 2px rgba(94, 194, 183, 0.25);
+  background: #ffffff;
+}
+
+.pastel-textarea-input {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-submit-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.contact-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 14px 0 6px 0;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.contact-divider::before,
+.contact-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.6);
+}
+
+.contact-divider span {
+  padding: 0 10px;
 }
 
 /* Project Detail Overlay Modal */
@@ -1262,13 +1427,19 @@ body {
 }
 
 .project-detail-list {
-  padding-left: 16px;
+  padding-left: 20px !important;
   font-size: 12px;
   line-height: 1.5;
   color: var(--text-secondary);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+  list-style-type: disc !important;
+}
+
+.project-detail-list li {
+  display: list-item !important;
+  list-style-type: disc !important;
 }
 
 .project-links-note {

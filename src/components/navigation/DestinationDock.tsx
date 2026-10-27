@@ -1,5 +1,5 @@
 import React from 'react';
-import { DESTINATIONS } from '../../data/portfolio';
+import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { DestinationId, NavigationState } from '../../types/portfolio';
 import { JourneyProgress } from './JourneyProgress';
 
@@ -20,6 +20,8 @@ export const DestinationDock: React.FC<DestinationDockProps> = ({
   onToggleSound,
   onToggleReducedMotion,
 }) => {
+  const { destinations } = usePortfolioData();
+
   if (!navState.isDockExpanded) {
     return null;
   }
@@ -43,6 +45,17 @@ export const DestinationDock: React.FC<DestinationDockProps> = ({
           </div>
 
           <div className="dock-utility-controls">
+            <a
+              href="/"
+              className="utility-chip"
+              style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+              aria-label="Return to Main Homepage"
+              title="Return to Neobrutalism Homepage"
+              data-testid="dock-home-link"
+            >
+              ← Home
+            </a>
+
             <button
               type="button"
               className={`utility-chip ${
@@ -79,7 +92,7 @@ export const DestinationDock: React.FC<DestinationDockProps> = ({
           className="destination-dock-grid"
           aria-label="Portfolio world destinations"
         >
-          {DESTINATIONS.map((dest) => {
+          {destinations.map((dest) => {
             const isCurrent =
               !navState.isTravelling && navState.currentLandmark === dest.id;
             const isTarget = navState.targetDestination === dest.id;

@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-  DESTINATIONS,
-  getDestinationById,
-  PORTFOLIO_DATA,
-} from '../../data/portfolio';
+import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { DestinationId, NavigationState } from '../../types/portfolio';
 import { ContactCard } from './ContactCard';
 
@@ -26,6 +22,7 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
   onSelectDestination,
   onOpenProjectDetail,
 }) => {
+  const { portfolioData, destinations, getDestinationById } = usePortfolioData();
   const [selectedSkillGroupId, setSelectedSkillGroupId] =
     useState<string>('all');
 
@@ -40,16 +37,16 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
   }
 
   const destination = getDestinationById(navState.visiblePanel);
-  const nextIndex = (destination.order + 1) % DESTINATIONS.length;
+  const nextIndex = (destination.order + 1) % destinations.length;
   const prevIndex =
-    (destination.order - 1 + DESTINATIONS.length) % DESTINATIONS.length;
-  const nextDestination = DESTINATIONS[nextIndex];
-  const prevDestination = DESTINATIONS[prevIndex];
+    (destination.order - 1 + destinations.length) % destinations.length;
+  const nextDestination = destinations[nextIndex];
+  const prevDestination = destinations[prevIndex];
 
   const renderSectionContent = () => {
     switch (destination.id) {
       case 'intro': {
-        const { persona } = PORTFOLIO_DATA;
+        const { persona } = portfolioData;
         return (
           <div className="panel-section-intro" data-testid="panel-content-intro">
             <div className="intro-hero-graphic" aria-hidden="true">
@@ -99,7 +96,7 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
 
             <div className="demo-notice-banner" role="note">
               <span className="demo-notice-pill">DEMO NOTICE</span>
-              <span>{PORTFOLIO_DATA.demonstrationNotice}</span>
+              <span>{portfolioData.demonstrationNotice}</span>
             </div>
 
             <div className="panel-cta-row">
@@ -125,7 +122,7 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
       }
 
       case 'about': {
-        const { about } = PORTFOLIO_DATA;
+        const { about } = portfolioData;
         return (
           <div className="panel-section-about" data-testid="panel-content-about">
             <p className="panel-headline">{about.headline}</p>
@@ -153,8 +150,8 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
       case 'skills': {
         const groups =
           selectedSkillGroupId === 'all'
-            ? PORTFOLIO_DATA.skillGroups
-            : PORTFOLIO_DATA.skillGroups.filter(
+            ? portfolioData.skillGroups
+            : portfolioData.skillGroups.filter(
                 (g) => g.id === selectedSkillGroupId
               );
 
@@ -178,9 +175,9 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
                 onClick={() => setSelectedSkillGroupId('all')}
                 data-testid="skill-filter-all"
               >
-                All Domains ({PORTFOLIO_DATA.skillGroups.length})
+                All Domains ({portfolioData.skillGroups.length})
               </button>
-              {PORTFOLIO_DATA.skillGroups.map((group) => (
+              {portfolioData.skillGroups.map((group) => (
                 <button
                   key={group.id}
                   type="button"
@@ -247,7 +244,7 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
             </p>
 
             <div className="projects-gallery-stack">
-              {PORTFOLIO_DATA.projects.map((project) => (
+              {portfolioData.projects.map((project) => (
                 <article
                   key={project.id}
                   className="project-gallery-card"
@@ -304,7 +301,7 @@ export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
             data-testid="panel-content-experience"
           >
             <div className="experience-timeline">
-              {PORTFOLIO_DATA.experiences.map((exp) => (
+              {portfolioData.experiences.map((exp) => (
                 <div key={exp.id} className="timeline-item">
                   <div className="timeline-marker" />
                   <div className="timeline-content">

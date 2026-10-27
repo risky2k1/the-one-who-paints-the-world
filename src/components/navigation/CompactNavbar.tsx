@@ -1,5 +1,5 @@
 import React from 'react';
-import { DESTINATIONS } from '../../data/portfolio';
+import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { DestinationId, NavigationState } from '../../types/portfolio';
 import { JourneyProgress } from './JourneyProgress';
 
@@ -20,6 +20,8 @@ export const CompactNavbar: React.FC<CompactNavbarProps> = ({
   onToggleSound,
   onToggleReducedMotion,
 }) => {
+  const { destinations } = usePortfolioData();
+
   if (navState.isDockExpanded) {
     return null;
   }
@@ -36,7 +38,7 @@ export const CompactNavbar: React.FC<CompactNavbarProps> = ({
             className="compact-nav-items"
             aria-label="Compact destination navigation"
           >
-            {DESTINATIONS.map((dest) => {
+            {destinations.map((dest) => {
               const isCurrent =
                 !navState.isTravelling && navState.currentLandmark === dest.id;
               const isTargetPending =
@@ -71,6 +73,16 @@ export const CompactNavbar: React.FC<CompactNavbarProps> = ({
           </nav>
 
           <div className="compact-utility-controls">
+            <a
+              href="/"
+              className="utility-chip is-small"
+              style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+              aria-label="Return to Main Homepage"
+              title="Return to Neobrutalism Homepage"
+              data-testid="compact-home-link"
+            >
+              ← Home
+            </a>
             <button
               type="button"
               className={`utility-chip is-small ${

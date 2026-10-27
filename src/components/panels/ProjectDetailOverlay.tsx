@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PORTFOLIO_DATA } from '../../data/portfolio';
+import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { ProjectItem } from '../../types/portfolio';
 
 export interface ProjectDetailOverlayProps {
@@ -11,10 +11,11 @@ export const ProjectDetailOverlay: React.FC<ProjectDetailOverlayProps> = ({
   activeProjectId,
   onClose,
 }) => {
+  const { portfolioData } = usePortfolioData();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const project: ProjectItem | undefined = PORTFOLIO_DATA.projects.find(
+  const project: ProjectItem | undefined = portfolioData.projects.find(
     (p) => p.id === activeProjectId
   );
 
@@ -274,9 +275,8 @@ export const ProjectDetailOverlay: React.FC<ProjectDetailOverlayProps> = ({
             </h3>
             <p className="project-links-note">
               In compliance with data-integrity guidelines, these links are safe
-              configurable placeholders defined in{' '}
-              <code>src/data/portfolio.ts</code> rather than fabricated external
-              URLs.
+              configurable placeholders retrieved from Botble CMS API rather
+              than fabricated external URLs.
             </p>
             <div className="project-links-grid">
               {project.links.map((link) => {

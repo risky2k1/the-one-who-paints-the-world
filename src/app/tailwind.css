@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .neo-box {
+    border: 2px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+  }
+
+  .neo-box-sm {
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0px 0px #000000;
+  }
+
+  .neo-box-lg {
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0px 0px #000000;
+  }
+
+  .neo-btn {
+    border: 2px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+
+  .neo-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px 0px #000000;
+  }
+
+  .neo-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px 0px #000000;
+  }
+
+  .neo-badge {
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0px 0px #000000;
+  }
+
+  .neo-card {
+    border: 2px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .neo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 7px 7px 0px 0px #000000;
+  }
+
+  .neo-grid-bg {
+    background-color: #faf7f2;
+    background-size: 28px 28px;
+    background-image: radial-gradient(circle, #d5cebf 1.5px, transparent 1.5px);
+  }
+
+  .neo-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: neoMarquee 26s linear infinite;
+  }
+
+  @keyframes neoMarquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
