@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { kidsPath } from '@/lib/kids/config';
 import type { PlaySource } from '@/lib/kids/play';
 import type { SessionSummary } from '@/lib/kids/types';
+import { StickerBadge } from './StickerBadge';
 
 interface SessionSummaryCardProps {
   summary: SessionSummary;
@@ -51,14 +52,12 @@ export function SessionSummaryCard({ summary, source, onRetry }: SessionSummaryC
 
       <div className="p-4 rounded-2xl bg-amber-50 border-2 border-dashed border-amber-300 mb-8">
         {summary.reward ? (
-          <div>
-            <div className="text-sm text-amber-800 font-medium mb-1">Phần thưởng của con</div>
-            <div className="text-xl font-bold text-amber-900 mb-2">
-              🎁 Sticker mới: <span className="underline">{summary.reward.sticker_key}</span>
-            </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="text-sm text-amber-800 font-bold">Con nhận được:</div>
+            <StickerBadge stickerKey={summary.reward.sticker_key} size="lg" />
             <Link
               href={kidsPath('/rewards')}
-              className="inline-block text-sm font-bold text-amber-700 hover:text-amber-800 underline"
+              className="mt-1 inline-block text-sm font-bold text-amber-700 hover:text-amber-800 underline"
             >
               Xem phòng trưng bày ➔
             </Link>
