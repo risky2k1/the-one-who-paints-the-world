@@ -45,3 +45,4 @@ export function CubePrompt({ heights }: CubePromptProps) {
     </div>
   );
 }
+

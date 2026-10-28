@@ -66,3 +66,4 @@ const DEFAULT_STICKER: StickerVisual = {
 export function stickerVisual(key: string): StickerVisual {
   return STICKER_CATALOG[key] ?? DEFAULT_STICKER;
 }
+

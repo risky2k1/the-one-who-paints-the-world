@@ -79,3 +79,4 @@ export function CubeIsoFallback({ heights }: CubeIsoFallbackProps) {
     </div>
   );
 }
+

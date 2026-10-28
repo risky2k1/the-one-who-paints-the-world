@@ -84,3 +84,4 @@ export default function CubeScene({ heights, onContextLost }: CubeSceneProps) {
     </div>
   );
 }
+

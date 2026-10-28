@@ -93,3 +93,4 @@ export function isoFaces(heights: number[][]): IsoFace[] {
 
   return faces;
 }
+

@@ -323,3 +323,4 @@ export function StickerModel({ shape, color, autoRotate = false }: StickerModelP
 
   return <group ref={groupRef}>{renderShape()}</group>;
 }
+

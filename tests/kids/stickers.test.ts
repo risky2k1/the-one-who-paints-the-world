@@ -57,3 +57,4 @@ describe('stickers catalog and visual', () => {
     expect(fallback.color).toBe('#a78bfa');
   });
 });
+

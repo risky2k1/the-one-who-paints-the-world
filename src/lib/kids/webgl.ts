@@ -10,3 +10,4 @@ export function hasWebGL(): boolean {
     return false;
   }
 }
+

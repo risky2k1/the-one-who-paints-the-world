@@ -103,3 +103,4 @@ export function padKeysFor(kind: InputKind): PadKey[] {
   }
   return [...digits, '0', 'back'];
 }
+

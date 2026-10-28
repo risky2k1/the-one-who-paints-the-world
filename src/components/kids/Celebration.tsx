@@ -28,3 +28,4 @@ export function Celebration({ message = 'Giỏi quá! 🎉' }: { message?: strin
     </div>
   );
 }
+

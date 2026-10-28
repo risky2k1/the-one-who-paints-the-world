@@ -83,3 +83,4 @@ export function FeedbackPanel({ feedback, onNext }: FeedbackPanelProps) {
 
   return null;
 }
+
