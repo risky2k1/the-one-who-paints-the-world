@@ -8,7 +8,7 @@ import {
   type PlayAction,
   type PlaySource,
   type PlayState,
-} from '@/features/kids/lib/play';
+} from './play';
 import type { PracticeSession, SessionSummary } from '@/shared/api/kids';
 import { installStorages } from '@/test/helpers';
 

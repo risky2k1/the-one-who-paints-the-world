@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { stickerVisual, ALL_STICKER_KEYS } from '@/features/kids/lib/stickers';
+import { stickerVisual, ALL_STICKER_KEYS } from './stickers';
 
 describe('stickers catalog and visual', () => {
   const REQUIRED_24_KEYS = [

@@ -8,7 +8,7 @@ import {
 import {
   createInitialNavigationState,
   navigationReducer,
-} from '@/features/portfolio/lib/navigationState';
+} from './navigationState';
 import {
   computeTravelPlan,
   evaluateTravelKinematics,
@@ -16,7 +16,7 @@ import {
   getRouteDistanceBetween,
   getTotalRouteLength,
   sampleRouteAt,
-} from '@/features/portfolio/lib/routeController';
+} from './routeController';
 
 export interface TestResult {
   name: string;

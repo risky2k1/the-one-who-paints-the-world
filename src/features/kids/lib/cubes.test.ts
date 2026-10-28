@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cubePositions, isoFaces } from '@/features/kids/lib/cubes';
+import { cubePositions, isoFaces } from './cubes';
 
 describe('cubes geometry', () => {
   describe('cubePositions', () => {

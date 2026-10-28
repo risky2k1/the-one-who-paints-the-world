@@ -6,7 +6,7 @@ import {
   padKeysFor,
   type InputKind,
   type PadKey,
-} from '@/features/kids/lib/answerInput';
+} from './answerInput';
 import type { Prompt } from '@/shared/api/kids';
 
 describe('answerInput', () => {

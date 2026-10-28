@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { KidsApiError } from '@/shared/api/kids';
-import { authRedirectFor } from '@/features/kids/lib/authRedirect';
-import { getDeviceToken, getKidSession, setDeviceToken, setKidSession } from '@/features/kids/lib/storage';
+import { authRedirectFor } from './authRedirect';
+import { getDeviceToken, getKidSession, setDeviceToken, setKidSession } from './storage';
 import { installStorages } from '@/test/helpers';
 
 beforeEach(() => {
