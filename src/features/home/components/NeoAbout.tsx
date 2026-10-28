@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { PortfolioData } from '@/shared/api/portfolio';
+import { PATHS } from '@/shared/config/paths';
 
 interface NeoAboutProps {
   about: PortfolioData['about'];
@@ -87,7 +88,7 @@ export const NeoAbout: React.FC<NeoAboutProps> = ({ about }) => {
         </div>
 
         <Link
-          href="/portfolio"
+          href={PATHS.portfolio}
           className="neo-btn inline-flex items-center gap-3 bg-[#FF90E8] text-black font-black uppercase text-base sm:text-lg px-8 py-4 rounded-xl shrink-0"
         >
           <span>🎮 Launch 3D World</span>

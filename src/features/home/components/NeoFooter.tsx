@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { PATHS } from '@/shared/config/paths';
 
 interface NeoFooterProps {
   isLive?: boolean;
@@ -57,7 +58,7 @@ export const NeoFooter: React.FC<NeoFooterProps> = ({ isLive = false }) => {
               </div>
 
               <Link
-                href="/portfolio"
+                href={PATHS.portfolio}
                 className="neo-btn-sm w-full inline-flex items-center justify-center gap-2 bg-[#FF90E8] text-black text-xs font-black uppercase py-3 rounded-xl"
               >
                 <span>🚗 Or Visit In 3D World Experience</span>
@@ -103,12 +104,12 @@ export const NeoFooter: React.FC<NeoFooterProps> = ({ isLive = false }) => {
             </div>
             <ul className="space-y-2 text-xs font-bold uppercase text-neutral-700">
               <li>
-                <Link href="/" className="hover:underline">
+                <Link href={PATHS.home} className="hover:underline">
                   Home (Neobrutalism)
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:underline text-[#ff2ec7] font-black">
+                <Link href={PATHS.portfolio} className="hover:underline text-[#ff2ec7] font-black">
                   🚀 3D Portfolio World
                 </Link>
               </li>

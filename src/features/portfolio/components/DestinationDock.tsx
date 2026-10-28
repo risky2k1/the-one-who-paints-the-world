@@ -2,6 +2,7 @@ import React from 'react';
 import { usePortfolioData } from '../context/PortfolioDataContext';
 import { DestinationId, NavigationState } from '../types';
 import { JourneyProgress } from './JourneyProgress';
+import { PATHS } from '@/shared/config/paths';
 
 export interface DestinationDockProps {
   navState: NavigationState;
@@ -46,7 +47,7 @@ export const DestinationDock: React.FC<DestinationDockProps> = ({
 
           <div className="dock-utility-controls">
             <a
-              href="/"
+              href={PATHS.home}
               className="utility-chip"
               style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
               aria-label="Return to Main Homepage"

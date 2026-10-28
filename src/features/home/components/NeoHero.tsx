@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { PortfolioData } from '@/shared/api/portfolio';
+import { PATHS } from '@/shared/config/paths';
 
 interface NeoHeroProps {
   persona: PortfolioData['persona'];
@@ -53,7 +54,7 @@ export const NeoHero: React.FC<NeoHeroProps> = ({ persona }) => {
       {/* Action Buttons */}
       <div className="flex flex-wrap items-center gap-4 mb-16">
         <Link
-          href="/portfolio"
+          href={PATHS.portfolio}
           className="neo-btn inline-flex items-center gap-2.5 bg-[#FFE600] text-black font-black uppercase text-base sm:text-lg px-6 py-3.5 rounded-xl"
         >
           <span>🚀</span>
@@ -100,7 +101,7 @@ export const NeoHero: React.FC<NeoHeroProps> = ({ persona }) => {
               </p>
             </div>
             <Link
-              href="/portfolio"
+              href={PATHS.portfolio}
               className="neo-btn-sm w-full inline-flex items-center justify-center gap-1.5 bg-[#FFE600] text-black text-xs font-black uppercase py-2 rounded-lg"
             >
               <span>Explore In 3D</span>

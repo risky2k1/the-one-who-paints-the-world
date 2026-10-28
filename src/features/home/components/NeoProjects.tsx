@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ProjectItem, ProjectMetric } from '@/shared/api/portfolio';
+import { PATHS } from '@/shared/config/paths';
 
 interface NeoProjectsProps {
   projects: ProjectItem[];
@@ -144,7 +145,7 @@ export const NeoProjects: React.FC<NeoProjectsProps> = ({ projects }) => {
                 </button>
 
                 <Link
-                  href="/portfolio"
+                  href={PATHS.portfolio}
                   className="neo-btn-sm inline-flex items-center justify-center gap-1.5 bg-[#FFE600] text-black text-xs font-black uppercase px-3.5 py-2.5 rounded-lg"
                   title="View this architectural landmark in 3D"
                 >

@@ -1,6 +1,6 @@
 import React from 'react';
-import './globals.css';
-import './tailwind.css';
+import '@/styles/globals.css';
+import '@/styles/tailwind.css';
 
 export const metadata = {
   title: 'Sora Lindqvist • Interactive 3D Platform & Cloud Portfolio',

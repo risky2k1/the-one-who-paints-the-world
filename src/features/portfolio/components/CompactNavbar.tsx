@@ -2,6 +2,7 @@ import React from 'react';
 import { usePortfolioData } from '../context/PortfolioDataContext';
 import { DestinationId, NavigationState } from '../types';
 import { JourneyProgress } from './JourneyProgress';
+import { PATHS } from '@/shared/config/paths';
 
 export interface CompactNavbarProps {
   navState: NavigationState;
@@ -74,7 +75,7 @@ export const CompactNavbar: React.FC<CompactNavbarProps> = ({
 
           <div className="compact-utility-controls">
             <a
-              href="/"
+              href={PATHS.home}
               className="utility-chip is-small"
               style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
               aria-label="Return to Main Homepage"

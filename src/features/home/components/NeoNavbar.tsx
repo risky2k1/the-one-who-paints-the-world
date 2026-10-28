@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { PATHS } from '@/shared/config/paths';
 
 interface NeoNavbarProps {
   isLive?: boolean;
@@ -16,7 +17,7 @@ export const NeoNavbar: React.FC<NeoNavbarProps> = ({ isLive = false }) => {
         {/* Brand / Logo */}
         <div className="flex items-center gap-3">
           <Link
-            href="/"
+            href={PATHS.home}
             className="flex items-center gap-2 group font-black text-lg tracking-tight"
           >
             <span className="bg-[#FFE600] text-black border-2 border-black px-2.5 py-1 rounded-md shadow-[2px_2px_0px_0px_#000] group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none transition-all">
@@ -74,7 +75,7 @@ export const NeoNavbar: React.FC<NeoNavbarProps> = ({ isLive = false }) => {
         {/* CTA: Navigate to 3D Portfolio */}
         <div className="flex items-center gap-3">
           <Link
-            href="/portfolio"
+            href={PATHS.portfolio}
             className="inline-flex items-center gap-2 bg-[#FF90E8] hover:bg-[#ff7be5] text-black font-black uppercase text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-lg border-2 border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[5px_5px_0px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#000] transition-all"
           >
             <span className="text-base">🚀</span>
@@ -136,7 +137,7 @@ export const NeoNavbar: React.FC<NeoNavbarProps> = ({ isLive = false }) => {
             04. Contact
           </a>
           <Link
-            href="/portfolio"
+            href={PATHS.portfolio}
             onClick={() => setMobileMenuOpen(false)}
             className="p-2.5 text-center bg-[#FF90E8] border-2 border-black rounded-md shadow-[3px_3px_0px_0px_#000] font-black"
           >
