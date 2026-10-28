@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { KidsApiError } from '@/shared/api/kids';
 import { authRedirectFor } from '@/features/kids/lib/authRedirect';
 import { getDeviceToken, getKidSession, setDeviceToken, setKidSession } from '@/features/kids/lib/storage';
-import { installStorages } from './helpers';
+import { installStorages } from '@/test/helpers';
 
 beforeEach(() => {
   installStorages();

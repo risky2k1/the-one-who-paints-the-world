@@ -10,7 +10,7 @@ import {
   type PlayState,
 } from '@/features/kids/lib/play';
 import type { PracticeSession, SessionSummary } from '@/shared/api/kids';
-import { installStorages } from './helpers';
+import { installStorages } from '@/test/helpers';
 
 describe('play state machine', () => {
   let storages: ReturnType<typeof installStorages>;

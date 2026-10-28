@@ -8,7 +8,7 @@ import {
   writeJson,
   readJson,
 } from '@/features/kids/lib/storage';
-import { installStorages } from './helpers';
+import { installStorages } from '@/test/helpers';
 
 let s: ReturnType<typeof installStorages>;
 beforeEach(() => {
