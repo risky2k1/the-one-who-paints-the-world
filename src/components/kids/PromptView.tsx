@@ -1,6 +1,7 @@
 'use client';
 
 import type { Prompt } from '@/lib/kids/types';
+import { CubePrompt } from './CubePrompt';
 
 export interface PromptViewProps {
   prompt: Prompt;
@@ -100,19 +101,12 @@ export function PromptView({
 
     case 'cube_count': {
       return (
-        <div className="flex flex-col items-center justify-center gap-4 my-6 text-center">
-          <div className="p-4 rounded-2xl bg-white shadow-sm border border-slate-200 max-w-sm w-full">
-            <div className="text-lg font-bold text-slate-700 mb-2">Đếm khối lập phương</div>
-            <div className="text-sm font-mono text-slate-500">
-              {prompt.heights.map((row, r) => (
-                <div key={r}>[{row.join(', ')}]</div>
-              ))}
-            </div>
-          </div>
-          <p className="text-lg sm:text-xl font-bold text-slate-700">
+        <div className="flex flex-col items-center justify-center gap-4 my-4 text-center">
+          <CubePrompt heights={prompt.heights} />
+          <p className="text-lg sm:text-xl font-extrabold text-slate-800">
             Có tất cả bao nhiêu khối lập phương?
           </p>
-          <div className="mt-2">{renderInputBox()}</div>
+          <div className="mt-1">{renderInputBox()}</div>
         </div>
       );
     }
