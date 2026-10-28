@@ -4,11 +4,11 @@ import {
   DESTINATIONS,
   getDestinationById,
   PORTFOLIO_DATA,
-} from '../src/shared/api/portfolio';
+} from '@/shared/api/portfolio';
 import {
   createInitialNavigationState,
   navigationReducer,
-} from '../src/features/portfolio/lib/navigationState';
+} from '@/features/portfolio/lib/navigationState';
 import {
   computeTravelPlan,
   evaluateTravelKinematics,
@@ -16,7 +16,7 @@ import {
   getRouteDistanceBetween,
   getTotalRouteLength,
   sampleRouteAt,
-} from '../src/features/portfolio/lib/routeController';
+} from '@/features/portfolio/lib/routeController';
 
 export interface TestResult {
   name: string;
