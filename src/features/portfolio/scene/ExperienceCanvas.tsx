@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { getAdaptiveQualityConfig } from '@/lib/performance/qualitySettings';
+import { getAdaptiveQualityConfig } from '@/shared/three';
 import { DestinationId, NavigationState } from '../types';
 import { WorldScene } from './WorldScene';
 

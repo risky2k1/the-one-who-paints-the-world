@@ -7,7 +7,7 @@ import {
   setKidSession,
   writeJson,
   readJson,
-} from '@/lib/kids/storage';
+} from '@/features/kids/lib/storage';
 import { installStorages } from './helpers';
 
 let s: ReturnType<typeof installStorages>;

@@ -8,8 +8,8 @@ import {
   type PlayAction,
   type PlaySource,
   type PlayState,
-} from '@/lib/kids/play';
-import type { PracticeSession, SessionSummary } from '@/lib/kids/types';
+} from '@/features/kids/lib/play';
+import type { PracticeSession, SessionSummary } from '@/shared/api/kids';
 import { installStorages } from './helpers';
 
 describe('play state machine', () => {

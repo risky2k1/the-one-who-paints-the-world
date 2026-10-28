@@ -5,7 +5,7 @@ import {
   createInitialNavigationState,
   navigationReducer,
 } from './lib/navigationState';
-import { soundController } from '@/lib/performance/qualitySettings';
+import { soundController } from '@/shared/three';
 import { DestinationId } from './types';
 import { ExperienceCanvas } from './scene/ExperienceCanvas';
 import { CompactNavbar } from './components/CompactNavbar';

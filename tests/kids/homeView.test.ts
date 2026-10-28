@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildHomeView } from '../../src/lib/kids/homeView';
-import type { AssignmentCard, KidHome, Topic } from '../../src/lib/kids/types';
+import { buildHomeView } from '@/features/kids/lib/homeView';
+import type { AssignmentCard, KidHome, Topic } from '@/shared/api/kids';
 
 const card = (id: number): AssignmentCard => ({ id, title: 't', question_count: 5, due_at: null, is_new: false });
 const home = (n: number, locked = false): KidHome => ({

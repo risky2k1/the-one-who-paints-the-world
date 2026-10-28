@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFrame } from '@react-three/fiber';
 import { DESTINATIONS } from '@/shared/api/portfolio';
-import { getAdaptiveQualityConfig } from '@/lib/performance/qualitySettings';
+import { getAdaptiveQualityConfig } from '@/shared/three';
 import { DestinationId, NavigationState } from '../types';
 import { CameraController } from './CameraController';
 import { Landmark } from './Landmark';

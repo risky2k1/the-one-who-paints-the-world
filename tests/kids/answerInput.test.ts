@@ -6,8 +6,8 @@ import {
   padKeysFor,
   type InputKind,
   type PadKey,
-} from '@/lib/kids/answerInput';
-import type { Prompt } from '@/lib/kids/types';
+} from '@/features/kids/lib/answerInput';
+import type { Prompt } from '@/shared/api/kids';
 
 describe('answerInput', () => {
   describe('applyKey table', () => {

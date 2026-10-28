@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { KidsApiError } from '../../src/lib/kids/api';
-import { setupDevice } from '../../src/lib/kids/setupDevice';
-import { getDeviceToken } from '../../src/lib/kids/storage';
+import { KidsApiError } from '@/shared/api/kids';
+import { setupDevice } from '@/features/kids/lib/setupDevice';
+import { getDeviceToken } from '@/features/kids/lib/storage';
 import { installStorages, mockFetch } from './helpers';
 
 const login = {

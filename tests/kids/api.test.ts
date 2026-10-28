@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { KidsApiError, kidsRequest, submitAnswer } from '@/lib/kids/api';
+import { KidsApiError, kidsRequest, submitAnswer } from '@/shared/api/kids';
 import { mockFetch } from './helpers';
 
 afterEach(() => vi.unstubAllGlobals());
