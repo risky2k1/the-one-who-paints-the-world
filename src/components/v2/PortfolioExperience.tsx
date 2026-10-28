@@ -10,12 +10,12 @@ import { DestinationId } from '../../types/portfolio';
 import { ExperienceCanvas } from '../experience/ExperienceCanvas';
 import { CompactNavbar } from '../navigation/CompactNavbar';
 import { DestinationDock } from '../navigation/DestinationDock';
-import { ProjectDetailOverlayV2 } from './ProjectDetailOverlayV2';
+import { ProjectDetailOverlay } from './ProjectDetailOverlay';
 import { ErrorFallback } from '../ui/ErrorFallback';
 import { LoadingScreen } from '../ui/LoadingScreen';
-import { FloatingContentPanelV2 } from './FloatingContentPanelV2';
+import { FloatingContentPanel } from './FloatingContentPanel';
 
-export const PortfolioExperienceV2: React.FC = () => {
+export const PortfolioExperience: React.FC = () => {
   const [navState, dispatch] = useReducer(
     navigationReducer,
     undefined,
@@ -221,14 +221,14 @@ export const PortfolioExperienceV2: React.FC = () => {
       />
 
       {/* Tailwind v2 Adaptive Floating Content Panel */}
-      <FloatingContentPanelV2
+      <FloatingContentPanel
         navState={navState}
         onSelectDestination={handleSelectDestination}
         onOpenProjectDetail={handleOpenProjectDetail}
       />
 
       {/* Modal Detail Overlay */}
-      <ProjectDetailOverlayV2
+      <ProjectDetailOverlay
         activeProjectId={navState.activeProjectId}
         onClose={handleCloseProjectDetail}
       />

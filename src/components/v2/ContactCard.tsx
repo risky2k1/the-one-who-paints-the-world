@@ -3,11 +3,11 @@ import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { sendContactMessage } from '../../lib/api/portfolioApi';
 import { ContactChannel, DestinationId } from '../../types/portfolio';
 
-export interface ContactCardV2Props {
+export interface ContactCardProps {
   onSelectDestination: (id: DestinationId) => void;
 }
 
-export const ContactCardV2: React.FC<ContactCardV2Props> = ({
+export const ContactCard: React.FC<ContactCardProps> = ({
   onSelectDestination,
 }) => {
   const { portfolioData } = usePortfolioData();

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { DestinationId, NavigationState } from '../../types/portfolio';
-import { ContactCardV2 } from './ContactCardV2';
+import { ContactCard } from './ContactCard';
 
-export interface FloatingContentPanelV2Props {
+export interface FloatingContentPanelProps {
   navState: NavigationState;
   onSelectDestination: (id: DestinationId) => void;
   onOpenProjectDetail: (
@@ -12,7 +12,7 @@ export interface FloatingContentPanelV2Props {
   ) => void;
 }
 
-export const FloatingContentPanelV2: React.FC<FloatingContentPanelV2Props> = ({
+export const FloatingContentPanel: React.FC<FloatingContentPanelProps> = ({
   navState,
   onSelectDestination,
   onOpenProjectDetail,
@@ -318,7 +318,7 @@ export const FloatingContentPanelV2: React.FC<FloatingContentPanelV2Props> = ({
 
       case 'contact':
       default:
-        return <ContactCardV2 onSelectDestination={onSelectDestination} />;
+        return <ContactCard onSelectDestination={onSelectDestination} />;
     }
   };
 

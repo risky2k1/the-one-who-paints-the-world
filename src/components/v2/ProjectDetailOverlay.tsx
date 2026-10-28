@@ -4,12 +4,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { usePortfolioData } from '../../context/PortfolioDataContext';
 import { ProjectItem } from '../../types/portfolio';
 
-export interface ProjectDetailOverlayV2Props {
+export interface ProjectDetailOverlayProps {
   activeProjectId: string | null;
   onClose: () => void;
 }
 
-export const ProjectDetailOverlayV2: React.FC<ProjectDetailOverlayV2Props> = ({
+export const ProjectDetailOverlay: React.FC<ProjectDetailOverlayProps> = ({
   activeProjectId,
   onClose,
 }) => {
