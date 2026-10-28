@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { usePortfolioData } from '../../context/PortfolioDataContext';
-import { sendContactMessage } from '../../lib/api/portfolioApi';
-import { ContactChannel, DestinationId } from '../../types/portfolio';
+import { usePortfolioData } from '../context/PortfolioDataContext';
+import { sendContactMessage } from '@/shared/api/portfolio';
+import { ContactChannel, DestinationId } from '../types';
 
 export interface ContactCardProps {
   onSelectDestination: (id: DestinationId) => void;

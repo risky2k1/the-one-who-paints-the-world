@@ -4,18 +4,18 @@ import React, { useCallback, useEffect, useReducer, useRef, useState } from 'rea
 import {
   createInitialNavigationState,
   navigationReducer,
-} from '../../lib/navigation/navigationState';
-import { soundController } from '../../lib/performance/qualitySettings';
-import { DestinationId } from '../../types/portfolio';
-import { ExperienceCanvas } from '../experience/ExperienceCanvas';
-import { CompactNavbar } from '../navigation/CompactNavbar';
-import { DestinationDock } from '../navigation/DestinationDock';
-import { ProjectDetailOverlay } from './ProjectDetailOverlay';
-import { ErrorFallback } from '../ui/ErrorFallback';
-import { LoadingScreen } from '../ui/LoadingScreen';
-import { FloatingContentPanel } from './FloatingContentPanel';
+} from './lib/navigationState';
+import { soundController } from '@/lib/performance/qualitySettings';
+import { DestinationId } from './types';
+import { ExperienceCanvas } from './scene/ExperienceCanvas';
+import { CompactNavbar } from './components/CompactNavbar';
+import { DestinationDock } from './components/DestinationDock';
+import { ProjectDetailOverlay } from './components/ProjectDetailOverlay';
+import { ErrorFallback } from './components/ErrorFallback';
+import { LoadingScreen } from './components/LoadingScreen';
+import { FloatingContentPanel } from './components/FloatingContentPanel';
 
-export const PortfolioExperience: React.FC = () => {
+export const PortfolioView: React.FC = () => {
   const [navState, dispatch] = useReducer(
     navigationReducer,
     undefined,

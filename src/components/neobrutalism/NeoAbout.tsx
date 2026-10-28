@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { PortfolioData } from '../../types/portfolio';
+import { PortfolioData } from '@/shared/api/portfolio';
 
 interface NeoAboutProps {
   about: PortfolioData['about'];

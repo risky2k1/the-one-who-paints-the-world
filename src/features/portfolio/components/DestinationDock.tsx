@@ -1,6 +1,6 @@
 import React from 'react';
-import { usePortfolioData } from '../../context/PortfolioDataContext';
-import { DestinationId, NavigationState } from '../../types/portfolio';
+import { usePortfolioData } from '../context/PortfolioDataContext';
+import { DestinationId, NavigationState } from '../types';
 import { JourneyProgress } from './JourneyProgress';
 
 export interface DestinationDockProps {

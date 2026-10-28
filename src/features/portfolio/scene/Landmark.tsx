@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
-import { getLandmarkTransform } from '../../lib/navigation/routeController';
+import { getLandmarkTransform } from '../lib/routeController';
 import {
   DestinationConfig,
   DestinationId,
-} from '../../types/portfolio';
+} from '../types';
 
 export interface LandmarkProps {
   destination: DestinationConfig;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { fetchPortfolioData } from '../lib/api/portfolioApi';
+import { fetchPortfolioData } from '@/shared/api/portfolio';
 import { NeoNavbar } from '../components/neobrutalism/NeoNavbar';
 import { NeoHero } from '../components/neobrutalism/NeoHero';
 import { NeoMarquee } from '../components/neobrutalism/NeoMarquee';

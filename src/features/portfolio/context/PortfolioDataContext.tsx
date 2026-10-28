@@ -7,13 +7,14 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { DESTINATIONS, PORTFOLIO_DATA } from '../data/portfolio';
-import { fetchPortfolioData } from '../lib/api/portfolioApi';
 import {
-  DestinationConfig,
-  DestinationId,
-  PortfolioData,
-} from '../types/portfolio';
+  DESTINATIONS,
+  PORTFOLIO_DATA,
+  fetchPortfolioData,
+  type DestinationConfig,
+  type DestinationId,
+  type PortfolioData,
+} from '@/shared/api/portfolio';
 
 export interface PortfolioDataContextType {
   portfolioData: PortfolioData;

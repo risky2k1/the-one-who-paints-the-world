@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
-import { getDestinationById } from '../../data/portfolio';
+import { getDestinationById } from '@/shared/api/portfolio';
 import {
   getLandmarkTransform,
   sampleRouteAt,
-} from '../../lib/navigation/routeController';
-import { NavigationState } from '../../types/portfolio';
+} from '../lib/routeController';
+import { NavigationState } from '../types';
 
 export interface CameraControllerProps {
   navState: NavigationState;

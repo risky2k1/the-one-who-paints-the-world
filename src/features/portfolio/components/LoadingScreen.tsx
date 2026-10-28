@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExperiencePhase } from '../../types/portfolio';
+import { ExperiencePhase } from '../types';
 
 export interface LoadingScreenProps {
   phase: ExperiencePhase;

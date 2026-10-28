@@ -1,6 +1,6 @@
 import React from 'react';
-import { DESTINATIONS } from '../../data/portfolio';
-import { DestinationId, NavigationState } from '../../types/portfolio';
+import { DESTINATIONS } from '@/shared/api/portfolio';
+import { DestinationId, NavigationState } from '../types';
 
 export interface ErrorFallbackProps {
   navState: NavigationState;

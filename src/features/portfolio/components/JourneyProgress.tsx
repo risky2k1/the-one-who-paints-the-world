@@ -1,6 +1,6 @@
 import React from 'react';
-import { DESTINATIONS, getDestinationById } from '../../data/portfolio';
-import { DestinationId, NavigationState } from '../../types/portfolio';
+import { DESTINATIONS, getDestinationById } from '@/shared/api/portfolio';
+import { DestinationId, NavigationState } from '../types';
 
 export interface JourneyProgressProps {
   navState: NavigationState;

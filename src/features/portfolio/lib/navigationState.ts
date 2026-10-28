@@ -1,8 +1,8 @@
-import { DESTINATION_ORDER, getDestinationById } from '../../data/portfolio';
+import { DESTINATION_ORDER, getDestinationById } from '@/shared/api/portfolio';
 import {
   DestinationId,
   NavigationState,
-} from '../../types/portfolio';
+} from '../types';
 import {
   clampU,
   computeTravelPlan,

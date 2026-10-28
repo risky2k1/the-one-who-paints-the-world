@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { PortfolioData } from '../../types/portfolio';
+import { PortfolioData } from '@/shared/api/portfolio';
 
 interface NeoHeroProps {
   persona: PortfolioData['persona'];

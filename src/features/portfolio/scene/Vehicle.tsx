@@ -4,8 +4,8 @@ import { useFrame } from '@react-three/fiber';
 import {
   getTotalRouteLength,
   sampleRouteAt,
-} from '../../lib/navigation/routeController';
-import { NavigationState } from '../../types/portfolio';
+} from '../lib/routeController';
+import { NavigationState } from '../types';
 
 export interface VehicleProps {
   navState: NavigationState;

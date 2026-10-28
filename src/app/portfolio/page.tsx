@@ -1,8 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { PortfolioExperience } from '../../components/v2/PortfolioExperience';
-import { PortfolioDataProvider } from '../../context/PortfolioDataContext';
-import { fetchPortfolioData } from '../../lib/api/portfolioApi';
+import { PortfolioDataProvider, PortfolioView } from '@/features/portfolio';
+import { fetchPortfolioData } from '@/shared/api/portfolio';
 
 export const revalidate = 60;
 
@@ -17,7 +16,7 @@ export default async function PortfolioPage() {
 
   return (
     <PortfolioDataProvider initialData={data} initialIsLive={isLive}>
-      <PortfolioExperience />
+      <PortfolioView />
     </PortfolioDataProvider>
   );
 }

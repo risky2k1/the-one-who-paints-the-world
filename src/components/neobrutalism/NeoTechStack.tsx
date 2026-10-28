@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { SkillGroup } from '../../types/portfolio';
+import { SkillGroup } from '@/shared/api/portfolio';
 
 interface NeoTechStackProps {
   skillGroups: SkillGroup[];

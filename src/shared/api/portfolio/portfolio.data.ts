@@ -1,4 +1,4 @@
-import { DestinationConfig, DestinationId, PortfolioData } from '../types/portfolio';
+import { DestinationConfig, DestinationId, PortfolioData } from './portfolio.types';
 
 export const DESTINATION_ORDER: DestinationId[] = [
   'intro',

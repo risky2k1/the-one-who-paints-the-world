@@ -1,5 +1,5 @@
-import { DESTINATIONS, PORTFOLIO_DATA } from '../../data/portfolio';
-import { DestinationConfig, PortfolioData } from '../../types/portfolio';
+import { DESTINATIONS, PORTFOLIO_DATA } from './portfolio.data';
+import { DestinationConfig, PortfolioData } from './portfolio.types';
 
 export interface ContactMessagePayload {
   name: string;

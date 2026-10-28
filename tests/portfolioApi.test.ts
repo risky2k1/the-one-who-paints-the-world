@@ -1,6 +1,5 @@
 import assert from 'assert';
-import { PORTFOLIO_DATA } from '../src/data/portfolio';
-import { fetchPortfolioData, sendContactMessage } from '../src/lib/api/portfolioApi';
+import { PORTFOLIO_DATA, fetchPortfolioData, sendContactMessage } from '../src/shared/api/portfolio';
 
 export async function runPortfolioApiTestSuite() {
   console.log('Running Portfolio API & Fallback Test Suite...\n');

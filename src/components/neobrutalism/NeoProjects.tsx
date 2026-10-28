@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ProjectItem, ProjectMetric } from '../../types/portfolio';
+import { ProjectItem, ProjectMetric } from '@/shared/api/portfolio';
 
 interface NeoProjectsProps {
   projects: ProjectItem[];

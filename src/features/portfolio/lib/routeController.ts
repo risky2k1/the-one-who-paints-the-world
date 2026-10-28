@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import { DESTINATIONS, getDestinationById } from '../../data/portfolio';
+import { DESTINATIONS, getDestinationById } from '@/shared/api/portfolio';
 import {
   DestinationId,
   RouteSample,
   TravelPlan,
   Vector3Tuple,
-} from '../../types/portfolio';
+} from '../types';
 
 /**
  * Control points defining one continuous, scenic low-poly road across the miniature world.

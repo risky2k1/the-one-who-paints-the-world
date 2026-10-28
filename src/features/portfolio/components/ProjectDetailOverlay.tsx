@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { usePortfolioData } from '../../context/PortfolioDataContext';
-import { ProjectItem } from '../../types/portfolio';
+import { usePortfolioData } from '../context/PortfolioDataContext';
+import { ProjectItem } from '../types';
 
 export interface ProjectDetailOverlayProps {
   activeProjectId: string | null;

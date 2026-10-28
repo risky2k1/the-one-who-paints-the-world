@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import * as THREE from 'three';
-import { DESTINATIONS, getDestinationById } from '../../data/portfolio';
+import { DESTINATIONS, getDestinationById } from '@/shared/api/portfolio';
 import {
   getLandmarkTransform,
   sampleRouteAt,
-} from '../../lib/navigation/routeController';
-import { DestinationId } from '../../types/portfolio';
+} from '../lib/routeController';
+import { DestinationId } from '../types';
 
 export interface RoadProps {
   currentU: number;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { getAdaptiveQualityConfig } from '../../lib/performance/qualitySettings';
-import { DestinationId, NavigationState } from '../../types/portfolio';
+import { getAdaptiveQualityConfig } from '@/lib/performance/qualitySettings';
+import { DestinationId, NavigationState } from '../types';
 import { WorldScene } from './WorldScene';
 
 export interface ExperienceCanvasProps {

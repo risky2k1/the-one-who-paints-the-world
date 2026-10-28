@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { usePortfolioData } from '../../context/PortfolioDataContext';
-import { DestinationId, NavigationState } from '../../types/portfolio';
+import { usePortfolioData } from '../context/PortfolioDataContext';
+import { DestinationId, NavigationState } from '../types';
 import { ContactCard } from './ContactCard';
 
 export interface FloatingContentPanelProps {
