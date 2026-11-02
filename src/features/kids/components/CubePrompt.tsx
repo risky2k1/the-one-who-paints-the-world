@@ -7,7 +7,11 @@ import { CubeIsoFallback } from './CubeIsoFallback';
 
 const DynamicCubeScene = dynamic(() => import('../scene/CubeScene'), {
   ssr: false,
-  loading: () => <div className="w-full max-w-[320px] aspect-square mx-auto flex items-center justify-center bg-slate-50 rounded-2xl text-slate-400">Đang tải hình 3D...</div>,
+  loading: () => (
+    <div className="w-full max-w-[320px] aspect-square mx-auto flex items-center justify-center neo-box bg-[#FAF7F2] rounded-2xl text-neutral-600 font-bold">
+      Đang tải hình 3D...
+    </div>
+  ),
 });
 
 export interface CubePromptProps {
@@ -35,7 +39,7 @@ export function CubePrompt({ heights }: CubePromptProps) {
       {use3D ? (
         <div className="relative">
           <DynamicCubeScene heights={heights} onContextLost={() => setContextLost(true)} />
-          <p className="mt-2 text-xs font-semibold text-slate-500 text-center">
+          <p className="mt-2 text-xs font-bold text-neutral-600 text-center">
             👆 Con có thể chạm hoặc kéo để xoay khối hình nhé!
           </p>
         </div>
@@ -45,4 +49,3 @@ export function CubePrompt({ heights }: CubePromptProps) {
     </div>
   );
 }
-

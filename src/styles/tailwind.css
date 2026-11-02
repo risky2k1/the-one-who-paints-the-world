@@ -69,4 +69,12 @@
       transform: translateX(-50%);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .neo-btn,
+    .neo-card {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
 }

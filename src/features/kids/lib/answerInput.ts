@@ -30,41 +30,38 @@ export function inputKindOf(prompt: Prompt): InputKind | null {
   }
 }
 
+function applyComma(draft: string, kind: InputKind): string {
+  if (kind !== 'decimal') return draft;
+  if (draft.includes(',')) return draft;
+  if (draft === '') return '0,';
+  if (draft.length >= 9) return draft;
+  return `${draft},`;
+}
+
+function applySlash(draft: string, kind: InputKind): string {
+  if (kind !== 'fraction') return draft;
+  if (draft.includes('/')) return draft;
+  if (draft === '') return '';
+  if (draft.length >= 9) return draft;
+  return `${draft}/`;
+}
+
+function applyDigit(draft: string, digit: string): string {
+  if (draft === '0') {
+    return digit === '0' ? '0' : digit;
+  }
+  if (draft.length >= 9) {
+    return draft;
+  }
+  return `${draft}${digit}`;
+}
+
 export function applyKey(draft: string, key: PadKey, kind: InputKind): string {
-  if (key === 'clear') {
-    return '';
-  }
-
-  if (key === 'back') {
-    return draft.slice(0, -1);
-  }
-
-  if (key === ',') {
-    if (kind !== 'decimal') return draft;
-    if (draft.includes(',')) return draft;
-    if (draft === '') return '0,';
-    if (draft.length >= 9) return draft;
-    return `${draft},`;
-  }
-
-  if (key === '/') {
-    if (kind !== 'fraction') return draft;
-    if (draft.includes('/')) return draft;
-    if (draft === '') return '';
-    if (draft.length >= 9) return draft;
-    return `${draft}/`;
-  }
-
-  if (key >= '0' && key <= '9') {
-    if (draft === '0') {
-      return key === '0' ? '0' : key;
-    }
-    if (draft.length >= 9) {
-      return draft;
-    }
-    return `${draft}${key}`;
-  }
-
+  if (key === 'clear') return '';
+  if (key === 'back') return draft.slice(0, -1);
+  if (key === ',') return applyComma(draft, kind);
+  if (key === '/') return applySlash(draft, kind);
+  if (key >= '0' && key <= '9') return applyDigit(draft, key);
   return draft;
 }
 
@@ -103,4 +100,3 @@ export function padKeysFor(kind: InputKind): PadKey[] {
   }
   return [...digits, '0', 'back'];
 }
-

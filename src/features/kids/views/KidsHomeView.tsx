@@ -46,12 +46,15 @@ export function KidsHomeView() {
 
   const header = (
     <>
-      <Link href={kidsPath('/rewards')} className="inline-flex min-h-[56px] items-center rounded-full bg-white px-5 text-lg font-semibold shadow">
+      <Link
+        href={kidsPath('/rewards')}
+        className="inline-flex min-h-[56px] items-center rounded-xl bg-white px-5 text-base font-black neo-btn text-black"
+      >
         🏆 Phòng trưng bày
       </Link>
       <button
         type="button"
-        className="min-h-[56px] rounded-full bg-white px-5 text-lg font-semibold shadow"
+        className="min-h-[56px] rounded-xl bg-white px-5 text-base font-black neo-btn text-black"
         onClick={() => {
           clearKidSession();
           router.push(kidsPath());
@@ -67,28 +70,38 @@ export function KidsHomeView() {
 
   return (
     <KidsShell header={header}>
-      <h1 className="mb-6 flex flex-wrap items-center gap-3 text-3xl font-bold">
+      <h1 className="mb-6 flex flex-wrap items-center gap-3 text-3xl font-black text-neutral-950">
         <span aria-hidden="true" className="text-5xl">{av.emoji}</span>
         Chào {session.child.name}!
         {data && data.home.streak_current > 0 && (
-          <span className="rounded-full bg-orange-100 px-4 py-1 text-xl">🔥 {data.home.streak_current} ngày</span>
+          <span className="neo-badge bg-[#FFB86B] text-black font-black text-base px-3 py-1 rounded-lg">
+            🔥 {data.home.streak_current} ngày
+          </span>
         )}
       </h1>
-      {error && <p role="alert" className="mb-4 text-lg font-semibold text-amber-800">{error}</p>}
-      {!data && !error && <p className="text-xl">Đang tải...</p>}
+      {error && (
+        <div role="alert" className="neo-box-sm bg-[#FFE600] text-black font-bold p-3 rounded-xl mb-4 text-sm">
+          {error}
+        </div>
+      )}
+      {!data && !error && <p className="text-base font-bold text-neutral-700">Đang tải...</p>}
       {data && view && (
         <>
-          <section className="mb-6">
-            <h2 className="mb-3 text-2xl font-bold">📌 Bài bố mẹ giao</h2>
+          <section className="mb-8">
+            <h2 className="mb-4 text-2xl font-black text-neutral-950">📌 Bài bố mẹ giao</h2>
             <AssignmentList items={data.home.pending_assignments} />
           </section>
           {view.reminder && (
-            <p className="mb-6 rounded-2xl bg-sky-100 p-4 text-lg text-sky-900">{view.reminder}</p>
+            <div className="mb-8 rounded-2xl neo-box-sm bg-[#A6FAFF] p-4 text-base font-bold text-black">
+              {view.reminder}
+            </div>
           )}
           <section>
-            <h2 className="mb-3 text-2xl font-bold">🎮 Tự luyện</h2>
+            <h2 className="mb-4 text-2xl font-black text-neutral-950">🎮 Tự luyện</h2>
             {view.practiceLocked && (
-              <p className="mb-3 text-lg font-semibold">Làm xong bài bố mẹ giao rồi mình chơi tiếp nhé</p>
+              <p className="mb-3 text-base font-bold text-neutral-700">
+                Làm xong bài bố mẹ giao rồi mình chơi tiếp nhé
+              </p>
             )}
             <TopicGrid topics={view.practiceTopics} locked={view.practiceLocked} />
           </section>

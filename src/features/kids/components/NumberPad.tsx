@@ -15,16 +15,23 @@ export interface NumberPadProps {
   canSubmit?: boolean;
 }
 
-export function NumberPad({
+interface UseNumberPadKeyboardOptions {
+  kind: InputKind;
+  onKey: (key: PadKey) => void;
+  onSubmit: () => void;
+  disabled: boolean;
+  canSubmit: boolean;
+}
+
+function useNumberPadKeyboard({
   kind,
   onKey,
   onSubmit,
-  disabled = false,
-  canSubmit = false,
-}: NumberPadProps) {
+  disabled,
+  canSubmit,
+}: UseNumberPadKeyboardOptions) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't intercept if user is typing in a real input/textarea or meta keys
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
         return;
       }
@@ -44,72 +51,95 @@ export function NumberPad({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [kind, disabled, canSubmit, onKey, onSubmit]);
+}
 
-  const digits: PadKey[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+interface KeySlotProps {
+  kind: InputKind;
+  disabled: boolean;
+  onKey: (k: PadKey) => void;
+}
+
+function SpecialKeySlot({ kind, disabled, onKey }: KeySlotProps) {
+  if (kind === 'decimal') {
+    return (
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={() => onKey(',')}
+        className="min-h-[56px] min-w-[56px] neo-btn bg-white disabled:opacity-50 text-2xl font-black text-black rounded-xl select-none"
+      >
+        ,
+      </button>
+    );
+  }
+  if (kind === 'fraction') {
+    return (
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={() => onKey('/')}
+        className="min-h-[56px] min-w-[56px] neo-btn bg-white disabled:opacity-50 text-2xl font-black text-black rounded-xl select-none"
+      >
+        /
+      </button>
+    );
+  }
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={() => onKey('clear')}
+      aria-label="Xoá tất cả"
+      className="min-h-[56px] min-w-[56px] neo-btn bg-[#FAF7F2] disabled:opacity-50 text-lg font-black text-black rounded-xl select-none"
+    >
+      C
+    </button>
+  );
+}
+
+const DIGITS: PadKey[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+export function NumberPad({
+  kind,
+  onKey,
+  onSubmit,
+  disabled = false,
+  canSubmit = false,
+}: NumberPadProps) {
+  useNumberPadKeyboard({ kind, onKey, onSubmit, disabled, canSubmit });
 
   return (
     <div className="mx-auto w-full max-w-xs flex flex-col gap-3">
       <div className="grid grid-cols-3 gap-2 sm:gap-3">
-        {digits.map((digit) => (
+        {DIGITS.map((digit) => (
           <button
             key={digit}
             type="button"
             disabled={disabled}
             onClick={() => onKey(digit)}
-            className="min-h-[56px] min-w-[56px] h-14 rounded-2xl bg-white hover:bg-slate-50 active:bg-slate-200 disabled:opacity-50 text-2xl font-bold text-slate-800 shadow-md border-2 border-slate-100 flex items-center justify-center transition-all select-none"
+            className="min-h-[56px] min-w-[56px] neo-btn bg-white disabled:opacity-50 text-2xl font-black text-black rounded-xl select-none"
           >
             {digit}
           </button>
         ))}
 
-        {/* Bottom row slot 10 */}
-        {kind === 'decimal' ? (
-          <button
-            type="button"
-            disabled={disabled}
-            onClick={() => onKey(',')}
-            className="min-h-[56px] min-w-[56px] h-14 rounded-2xl bg-white hover:bg-slate-50 active:bg-slate-200 disabled:opacity-50 text-2xl font-bold text-slate-800 shadow-md border-2 border-slate-100 flex items-center justify-center transition-all select-none"
-          >
-            ,
-          </button>
-        ) : kind === 'fraction' ? (
-          <button
-            type="button"
-            disabled={disabled}
-            onClick={() => onKey('/')}
-            className="min-h-[56px] min-w-[56px] h-14 rounded-2xl bg-white hover:bg-slate-50 active:bg-slate-200 disabled:opacity-50 text-2xl font-bold text-slate-800 shadow-md border-2 border-slate-100 flex items-center justify-center transition-all select-none"
-          >
-            /
-          </button>
-        ) : (
-          <button
-            type="button"
-            disabled={disabled}
-            onClick={() => onKey('clear')}
-            aria-label="Xoá tất cả"
-            className="min-h-[56px] min-w-[56px] h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 active:bg-slate-200 disabled:opacity-50 text-sm font-semibold text-slate-600 shadow-md border-2 border-slate-100 flex items-center justify-center transition-all select-none"
-          >
-            C
-          </button>
-        )}
+        <SpecialKeySlot kind={kind} disabled={disabled} onKey={onKey} />
 
-        {/* Slot 11: 0 */}
         <button
           type="button"
           disabled={disabled}
           onClick={() => onKey('0')}
-          className="min-h-[56px] min-w-[56px] h-14 rounded-2xl bg-white hover:bg-slate-50 active:bg-slate-200 disabled:opacity-50 text-2xl font-bold text-slate-800 shadow-md border-2 border-slate-100 flex items-center justify-center transition-all select-none"
+          className="min-h-[56px] min-w-[56px] neo-btn bg-white disabled:opacity-50 text-2xl font-black text-black rounded-xl select-none"
         >
           0
         </button>
 
-        {/* Slot 12: back */}
         <button
           type="button"
           disabled={disabled}
           onClick={() => onKey('back')}
           aria-label="Xoá một ký tự"
-          className="min-h-[56px] min-w-[56px] h-14 rounded-2xl bg-slate-100 hover:bg-slate-200 active:bg-slate-300 disabled:opacity-50 text-xl font-bold text-slate-700 shadow-md border-2 border-slate-200 flex items-center justify-center transition-all select-none"
+          className="min-h-[56px] min-w-[56px] neo-btn bg-[#FAF7F2] disabled:opacity-50 text-xl font-black text-black rounded-xl select-none"
         >
           ⌫
         </button>
@@ -119,11 +149,10 @@ export function NumberPad({
         type="button"
         disabled={disabled || !canSubmit}
         onClick={onSubmit}
-        className="min-h-[56px] w-full mt-1 rounded-2xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed disabled:transform-none text-white text-xl font-extrabold shadow-lg transition-all flex items-center justify-center select-none"
+        className="min-h-[56px] w-full mt-1 rounded-xl neo-btn bg-[#FFE600] disabled:opacity-50 disabled:cursor-not-allowed text-black text-xl font-black select-none"
       >
         Kiểm tra ➔
       </button>
     </div>
   );
 }
-

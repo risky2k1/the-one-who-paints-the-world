@@ -25,7 +25,7 @@ export function StickerBadge({
     lg: 'w-24 h-24 text-5xl',
   }[size];
 
-  const badgeContent = (
+  return (
     <div
       className={`relative inline-flex flex-col items-center gap-1.5 ${
         onClick ? 'cursor-pointer active:scale-95 transition-transform' : ''
@@ -33,28 +33,25 @@ export function StickerBadge({
       onClick={onClick}
     >
       <div
-        className={`${sizeClasses} rounded-3xl flex items-center justify-center shadow-md border-2 border-white/80 select-none relative`}
-        style={{ backgroundColor: `${visual.color}33` }}
+        className={`${sizeClasses} rounded-2xl neo-box flex items-center justify-center select-none relative`}
+        style={{ backgroundColor: visual.color || '#FFE600' }}
       >
         <span role="img" aria-label={visual.label}>
           {visual.emoji}
         </span>
 
         {count !== undefined && count > 1 && (
-          <span className="absolute -top-1.5 -right-1.5 px-2 py-0.5 bg-amber-500 text-white text-xs font-black rounded-full shadow-sm border border-white">
+          <span className="absolute -top-2 -right-2 px-1.5 py-0.2 neo-badge bg-black text-white text-xs font-black rounded-md">
             ×{count}
           </span>
         )}
       </div>
 
       {showLabel && (
-        <span className="text-xs sm:text-sm font-bold text-slate-700 text-center max-w-[100px] truncate">
+        <span className="text-xs sm:text-sm font-black text-neutral-950 text-center max-w-[100px] truncate">
           {visual.label}
         </span>
       )}
     </div>
   );
-
-  return badgeContent;
 }
-

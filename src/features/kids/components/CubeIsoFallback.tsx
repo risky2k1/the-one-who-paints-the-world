@@ -1,77 +1,84 @@
 'use client';
 
 import { useMemo } from 'react';
-import { isoFaces } from '../lib/cubes';
+import { isoFaces, type IsoFace } from '../lib/cubes';
 
 interface CubeIsoFallbackProps {
   heights: number[][];
 }
 
+interface Bounds {
+  minX: number;
+  maxX: number;
+  minY: number;
+  maxY: number;
+}
+
+function updateBounds(pair: string, b: Bounds) {
+  const [xStr, yStr] = pair.split(',');
+  const x = Number(xStr);
+  const y = Number(yStr);
+  if (isNaN(x) || isNaN(y)) return;
+  if (x < b.minX) b.minX = x;
+  if (x > b.maxX) b.maxX = x;
+  if (y < b.minY) b.minY = y;
+  if (y > b.maxY) b.maxY = y;
+}
+
+function computeViewBox(faces: IsoFace[]) {
+  if (faces.length === 0) {
+    return { viewBox: '0 0 100 100', valid: false };
+  }
+
+  const b: Bounds = { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity };
+  for (const face of faces) {
+    const coords = face.points.split(' ');
+    for (const pair of coords) {
+      updateBounds(pair, b);
+    }
+  }
+
+  const pad = 24;
+  const width = Math.max(10, b.maxX - b.minX + pad * 2);
+  const height = Math.max(10, b.maxY - b.minY + pad * 2);
+  const x0 = b.minX - pad;
+  const y0 = b.minY - pad;
+
+  return { viewBox: `${x0} ${y0} ${width} ${height}`, valid: true };
+}
+
+const FILL_COLORS: Record<'top' | 'left' | 'right', string> = {
+  top: '#FFE600',
+  left: '#A6FAFF',
+  right: '#FF90E8',
+};
+
 export function CubeIsoFallback({ heights }: CubeIsoFallbackProps) {
   const faces = useMemo(() => isoFaces(heights), [heights]);
-
-  const { viewBox, valid } = useMemo(() => {
-    if (faces.length === 0) {
-      return { viewBox: '0 0 100 100', valid: false };
-    }
-
-    let minX = Infinity;
-    let maxX = -Infinity;
-    let minY = Infinity;
-    let maxY = -Infinity;
-
-    for (const face of faces) {
-      const coords = face.points.split(' ');
-      for (const pair of coords) {
-        const [xStr, yStr] = pair.split(',');
-        const x = Number(xStr);
-        const y = Number(yStr);
-        if (!isNaN(x) && !isNaN(y)) {
-          if (x < minX) minX = x;
-          if (x > maxX) maxX = x;
-          if (y < minY) minY = y;
-          if (y > maxY) maxY = y;
-        }
-      }
-    }
-
-    const pad = 24;
-    const width = Math.max(10, maxX - minX + pad * 2);
-    const height = Math.max(10, maxY - minY + pad * 2);
-    const x0 = minX - pad;
-    const y0 = minY - pad;
-
-    return { viewBox: `${x0} ${y0} ${width} ${height}`, valid: true };
-  }, [faces]);
+  const { viewBox, valid } = useMemo(() => computeViewBox(faces), [faces]);
 
   if (!valid) {
     return (
-      <div className="flex items-center justify-center h-48 bg-slate-50 rounded-2xl text-slate-400">
+      <div className="flex items-center justify-center h-48 neo-box bg-[#FAF7F2] rounded-2xl text-neutral-600 font-bold">
         Không có khối lập phương
       </div>
     );
   }
 
-  const fillColors: Record<'top' | 'left' | 'right', string> = {
-    top: '#a5b4fc', // indigo-300
-    left: '#6366f1', // indigo-500
-    right: '#4338ca', // indigo-700
-  };
-
   return (
     <div className="w-full max-w-[280px] sm:max-w-[320px] mx-auto aspect-square flex items-center justify-center p-2">
       <svg
         viewBox={viewBox}
-        className="w-full h-full drop-shadow-md select-none"
+        className="w-full h-full select-none"
         aria-label="Hình vẽ các khối lập phương"
       >
         {faces.map((f, i) => (
           <polygon
             key={i}
             points={f.points}
-            fill={fillColors[f.face]}
-            stroke="#1e1b4b"
-            strokeWidth="1.5"
+            fill={FILL_COLORS[f.face]}
+            stroke="#000000"
+            strokeWidth="2"
             strokeLinejoin="round"
           />
         ))}
@@ -79,4 +86,3 @@ export function CubeIsoFallback({ heights }: CubeIsoFallbackProps) {
     </div>
   );
 }
-

@@ -6,7 +6,7 @@ const fmt = (iso: string) => new Date(iso).toLocaleDateString('vi-VN', { day: '2
 
 export function AssignmentList({ items }: { items: AssignmentCard[] }) {
   if (items.length === 0) {
-    return <p className="text-xl">Hôm nay chưa có bài, con tự luyện nhé!</p>;
+    return <p className="text-lg font-bold text-neutral-700">Hôm nay chưa có bài, con tự luyện nhé!</p>;
   }
   return (
     <ul className="grid gap-4 sm:grid-cols-2">
@@ -14,13 +14,17 @@ export function AssignmentList({ items }: { items: AssignmentCard[] }) {
         <li key={a.id}>
           <Link
             href={`${kidsPath('/play')}?assignment=${a.id}`}
-            className="block min-h-[56px] rounded-2xl bg-white p-5 shadow-md ring-2 ring-amber-300 hover:bg-amber-100"
+            className="block min-h-[56px] rounded-2xl bg-white p-5 neo-card text-black hover:bg-[#FAF7F2]"
           >
             <div className="flex items-center justify-between gap-2">
-              <span className="text-2xl font-bold">{a.title}</span>
-              {a.is_new && <span className="rounded-full bg-amber-400 px-3 py-1 text-base font-bold">Mới</span>}
+              <span className="text-2xl font-black">{a.title}</span>
+              {a.is_new && (
+                <span className="neo-badge bg-[#FF90E8] text-black font-black text-xs px-2.5 py-1 rounded-md rotate-[-2deg]">
+                  Mới
+                </span>
+              )}
             </div>
-            <p className="mt-2 text-lg">
+            <p className="mt-2 text-base font-bold text-neutral-700">
               {a.question_count} câu{a.due_at ? ` · hạn ${fmt(a.due_at)}` : ''}
             </p>
           </Link>

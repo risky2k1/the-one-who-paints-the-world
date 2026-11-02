@@ -22,10 +22,9 @@ export function Celebration({ message = 'Giỏi quá! 🎉' }: { message?: strin
           </span>
         </div>
       )}
-      <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 tracking-wide text-center">
+      <div className="neo-badge bg-[#B8FF9F] text-black font-black text-2xl sm:text-3xl px-6 py-2 rounded-xl tracking-wide text-center -rotate-1">
         {message}
       </div>
     </div>
   );
 }
-

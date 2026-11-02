@@ -11,11 +11,11 @@ interface CubeSceneProps {
 }
 
 const LAYER_COLORS = [
-  '#93c5fd', // sky-300
-  '#a7f3d0', // emerald-200
-  '#fde047', // yellow-300
-  '#f472b6', // pink-400
-  '#c084fc', // purple-400
+  '#FFE600',
+  '#A6FAFF',
+  '#FF90E8',
+  '#B8FF9F',
+  '#FFB86B',
 ];
 
 function ContextWatcher({ onContextLost }: { onContextLost?(): void }) {
@@ -41,7 +41,6 @@ function CubesGroup({ heights }: { heights: number[][] }) {
   return (
     <group>
       {positions.map(([x, y, z], i) => {
-        // layer k = Math.floor(y - 0.5)
         const layer = Math.max(0, Math.floor(y - 0.5));
         const color = LAYER_COLORS[layer % LAYER_COLORS.length];
 
@@ -49,7 +48,7 @@ function CubesGroup({ heights }: { heights: number[][] }) {
           <mesh key={i} position={[x, y, z]}>
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial color={color} roughness={0.3} metalness={0.1} />
-            <Edges color="#334155" threshold={15} />
+            <Edges color="#000000" threshold={15} />
           </mesh>
         );
       })}
@@ -59,7 +58,7 @@ function CubesGroup({ heights }: { heights: number[][] }) {
 
 export default function CubeScene({ heights, onContextLost }: CubeSceneProps) {
   return (
-    <div className="w-full max-w-[320px] aspect-square mx-auto rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 shadow-inner">
+    <div className="w-full max-w-[320px] aspect-square mx-auto rounded-2xl overflow-hidden neo-box bg-[#FAF7F2]">
       <Canvas
         frameloop="demand"
         dpr={[1, 1.5]}
@@ -84,4 +83,3 @@ export default function CubeScene({ heights, onContextLost }: CubeSceneProps) {
     </div>
   );
 }
-

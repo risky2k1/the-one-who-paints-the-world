@@ -42,15 +42,14 @@ export function Countdown({ expiresAt, onTimeUp }: CountdownProps) {
   const minutes = Math.floor(remaining / 60);
   const seconds = remaining % 60;
   const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
   const isUrgent = remaining <= 60 && remaining > 0;
 
   return (
     <div
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-base font-semibold transition-colors ${
+      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-sm font-black transition-colors ${
         isUrgent
-          ? 'bg-amber-100 text-amber-700 animate-pulse'
-          : 'bg-slate-100 text-slate-700'
+          ? 'neo-badge bg-[#FFB86B] text-black animate-pulse'
+          : 'neo-badge bg-[#FAF7F2] text-black'
       }`}
       aria-label={`Thời gian còn lại: ${formatted}`}
     >

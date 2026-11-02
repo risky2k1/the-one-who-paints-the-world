@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { hasWebGL } from '@/shared/three';
-import { stickerVisual } from '../lib/stickers';
+import { stickerVisual, type StickerVisual } from '../lib/stickers';
 import { useReducedMotion } from '@/shared/hooks';
 import type { Reward } from '@/shared/api/kids';
 import { StickerBadge } from './StickerBadge';
@@ -12,6 +12,66 @@ const DynamicStickerViewer = dynamic(() => import('../scene/StickerScene'), {
   ssr: false,
   loading: () => <div className="text-4xl animate-pulse">✨</div>,
 });
+
+interface StickerModalProps {
+  visual: StickerVisual;
+  canUseWebGL: boolean;
+  reducedMotion: boolean;
+  onClose: () => void;
+}
+
+function StickerModal({ visual, canUseWebGL, reducedMotion, onClose }: StickerModalProps) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+      onClick={onClose}
+    >
+      <div
+        className="neo-card bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full text-center relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-4 right-4 w-10 h-10 rounded-xl neo-btn bg-[#FAF7F2] text-black font-black text-lg flex items-center justify-center"
+          aria-label="Đóng"
+        >
+          ✕
+        </button>
+
+        <h3 className="text-2xl font-black text-neutral-950 mb-2">
+          {visual.label}
+        </h3>
+
+        <div className="w-64 h-64 mx-auto my-4 rounded-xl neo-box bg-[#FAF7F2] flex items-center justify-center overflow-hidden">
+          {canUseWebGL ? (
+            <DynamicStickerViewer
+              shape={visual.shape}
+              color={visual.color}
+              autoRotate={!reducedMotion}
+            />
+          ) : (
+            <div className="text-7xl select-none">{visual.emoji}</div>
+          )}
+        </div>
+
+        <p className="text-sm font-bold text-neutral-700 mb-4">
+          {canUseWebGL
+            ? '👆 Con có thể chạm hoặc kéo để xoay sticker nhé!'
+            : 'Sticker siêu đáng yêu của con!'}
+        </p>
+
+        <button
+          type="button"
+          onClick={onClose}
+          className="min-h-[56px] px-8 rounded-xl neo-btn bg-[#FFE600] text-black font-black text-base"
+        >
+          Đóng
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export function StickerGallery({ rewards }: { rewards: Reward[] }) {
   const [canUseWebGL, setCanUseWebGL] = useState(false);
@@ -22,7 +82,6 @@ export function StickerGallery({ rewards }: { rewards: Reward[] }) {
     setCanUseWebGL(hasWebGL());
   }, []);
 
-  // Aggregate duplicate stickers and preserve earliest earned order
   const aggregated = useMemo(() => {
     const map = new Map<string, { key: string; count: number }>();
     for (const r of rewards) {
@@ -40,18 +99,17 @@ export function StickerGallery({ rewards }: { rewards: Reward[] }) {
 
   return (
     <div className="w-full">
-      {/* Shelf grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 bg-white/70 backdrop-blur-sm p-6 rounded-3xl border-2 border-amber-200/70 shadow-lg">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 neo-box bg-white p-6 rounded-2xl">
         {aggregated.map((item) => (
           <div
             key={item.key}
-            className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white hover:bg-amber-50/50 shadow-sm border border-amber-100 hover:shadow-md transition-all cursor-pointer"
+            className="flex flex-col items-center justify-center p-4 rounded-xl neo-card bg-[#FAF7F2] hover:bg-[#FFE600] transition-colors cursor-pointer"
             onClick={() => setSelectedKey(item.key)}
           >
             <StickerBadge stickerKey={item.key} count={item.count} size="lg" />
             <button
               type="button"
-              className="mt-2 text-xs font-bold text-indigo-600 hover:text-indigo-800"
+              className="mt-2 px-2.5 py-1 rounded-md neo-badge bg-white text-black text-xs font-black"
             >
               {canUseWebGL ? 'Xem 3D ➔' : 'Chi tiết ➔'}
             </button>
@@ -59,56 +117,13 @@ export function StickerGallery({ rewards }: { rewards: Reward[] }) {
         ))}
       </div>
 
-      {/* Modal / Inspector for selected sticker */}
-      {selectedKey && selectedVisual && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in"
-          onClick={() => setSelectedKey(null)}
-        >
-          <div
-            className="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border-4 border-amber-300 relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setSelectedKey(null)}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-lg flex items-center justify-center"
-              aria-label="Đóng"
-            >
-              ✕
-            </button>
-
-            <h3 className="text-2xl font-extrabold text-slate-800 mb-2">
-              {selectedVisual.label}
-            </h3>
-
-            <div className="w-64 h-64 mx-auto my-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden">
-              {canUseWebGL ? (
-                <DynamicStickerViewer
-                  shape={selectedVisual.shape}
-                  color={selectedVisual.color}
-                  autoRotate={!reducedMotion}
-                />
-              ) : (
-                <div className="text-7xl select-none">{selectedVisual.emoji}</div>
-              )}
-            </div>
-
-            <p className="text-sm font-semibold text-slate-500 mb-4">
-              {canUseWebGL
-                ? '👆 Con có thể chạm hoặc kéo để xoay sticker nhé!'
-                : 'Sticker siêu đáng yêu của con!'}
-            </p>
-
-            <button
-              type="button"
-              onClick={() => setSelectedKey(null)}
-              className="min-h-[48px] px-8 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-base shadow-md active:scale-95 transition-all"
-            >
-              Đóng
-            </button>
-          </div>
-        </div>
+      {selectedVisual && (
+        <StickerModal
+          visual={selectedVisual}
+          canUseWebGL={canUseWebGL}
+          reducedMotion={reducedMotion}
+          onClose={() => setSelectedKey(null)}
+        />
       )}
     </div>
   );

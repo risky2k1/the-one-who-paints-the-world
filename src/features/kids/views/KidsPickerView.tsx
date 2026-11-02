@@ -61,18 +61,39 @@ export function KidsPickerView() {
 
   return (
     <KidsShell>
-      <h1 className="mb-6 text-center text-3xl font-bold">Con là ai nào?</h1>
-      {error && <p role="alert" className="mb-4 text-center text-lg font-semibold text-amber-800">{error}</p>}
-      {kids?.length === 0 && (
-        <p className="text-center text-xl">
-          Bố mẹ chưa thêm bé nào.{' '}
-          <Link href={kidsPath('/parent')} className="underline">Khu bố mẹ</Link>
-        </p>
-      )}
-      {kids && kids.length > 0 && <AvatarGrid onPick={pick} busyId={busyId}>{kids}</AvatarGrid>}
-      <footer className="mt-10 text-center">
-        <Link href={kidsPath('/parent')} className="text-base underline">Khu bố mẹ</Link>
-      </footer>
+      <div className="py-6 sm:py-10">
+        <h1 className="mb-8 text-center text-3xl sm:text-4xl font-black text-neutral-950">
+          Con là ai nào?
+        </h1>
+        {error && (
+          <div role="alert" className="neo-box-sm bg-[#FFE600] text-black font-bold p-3 rounded-xl mb-6 text-center text-sm max-w-md mx-auto">
+            {error}
+          </div>
+        )}
+        {kids?.length === 0 && (
+          <div className="neo-card bg-white rounded-2xl p-8 text-center max-w-md mx-auto">
+            <p className="text-sm font-bold text-neutral-700 mb-4">
+              Bố mẹ chưa thêm bé nào.
+            </p>
+            <Link
+              href={kidsPath('/parent')}
+              className="neo-btn bg-[#FFE600] text-black font-black uppercase text-xs px-4 py-2 rounded-xl inline-block"
+            >
+              Vào khu bố mẹ
+            </Link>
+          </div>
+        )}
+        {kids && kids.length > 0 && <AvatarGrid onPick={pick} busyId={busyId}>{kids}</AvatarGrid>}
+        <footer className="mt-12 text-center">
+          <Link
+            href={kidsPath('/parent')}
+            className="neo-btn bg-white text-black font-extrabold uppercase text-xs sm:text-sm px-4 py-2 rounded-xl inline-flex items-center gap-1.5"
+          >
+            <span>🛡️</span>
+            <span>Khu bố mẹ</span>
+          </Link>
+        </footer>
+      </div>
     </KidsShell>
   );
 }
