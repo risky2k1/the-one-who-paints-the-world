@@ -32,9 +32,11 @@ const FALLBACK_ERROR = 'Có lỗi, con thử lại nhé';
 
 export type PlaySource = { topic_id: number } | { assignment_id: number };
 
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
 export async function kidsRequest<T>(
   path: string,
-  opts: { method?: 'GET' | 'POST'; token?: string; body?: unknown } = {},
+  opts: { method?: HttpMethod; token?: string; body?: unknown } = {},
 ): Promise<T> {
   const headers: Record<string, string> = { Accept: 'application/json' };
   if (opts.token) headers.Authorization = `Bearer ${opts.token}`;

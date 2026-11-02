@@ -120,6 +120,79 @@ export interface Parent {
   has_pin: boolean;
 }
 
+export interface ChildInput {
+  name: string;
+  avatar: string;
+  grade: number;
+  textbook: 'ket_noi' | 'chan_troi' | 'canh_dieu';
+  disabled_topic_ids: number[];
+  assigned_first: boolean;
+}
+
+export type ChildInputPartial = Partial<ChildInput>;
+
+export interface AssignmentInput {
+  child_id: number;
+  title: string;
+  topic_ids: number[];
+  question_count?: number;
+  difficulty?: 'adaptive' | 'easy' | 'medium' | 'hard';
+  due_at?: string | null;
+  time_limit_seconds?: number | null;
+}
+
+export type AssignmentInputPartial = Partial<AssignmentInput>;
+
+export interface Assignment extends AssignmentInput {
+  id: number;
+  created_at: string;
+}
+
+export interface ScoreLine {
+  session_id: number;
+  first_try_correct: number;
+  total: number;
+  duration_seconds: number;
+  completed_at: string;
+}
+
+export interface AssignmentResult {
+  assignment_id: number;
+  title: string;
+  attempts_count: number;
+  first: ScoreLine | null;
+  latest: ScoreLine | null;
+}
+
+export interface WeakSkill {
+  topic_id: number;
+  name: string;
+  first_try_accuracy: number;
+  answered: number;
+  level: number;
+}
+
+export interface SessionReviewQuestion extends QuestionView {
+  answer: string;
+  solution: string[];
+  given_answers: string[];
+  first_try_correct: boolean | null;
+}
+
+export interface SessionReview {
+  id: number;
+  assignment_id: number | null;
+  expires_at: string | null;
+  completed_at: string | null;
+  first_try_correct: number;
+  total: number;
+  questions: SessionReviewQuestion[];
+}
+
+export interface UnlockResponseData {
+  parent_token: string;
+}
+
 // Envelope `data` payloads (kidsRequest unwraps the envelope).
 export interface LoginResponse {
   parent_token: string;
@@ -131,3 +204,4 @@ export interface StartKidSessionResponse {
   kid_token: string;
   child: ChildCard;
 }
+
